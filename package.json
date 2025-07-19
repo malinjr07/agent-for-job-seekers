@@ -12,11 +12,13 @@
     "commitlint": "commitlint --edit"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/postcss": "^4.1.7",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.525.0",
     "next": "15.1.8",
     "postcss": "^8.5.3",

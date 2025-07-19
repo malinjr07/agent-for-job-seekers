@@ -24,6 +24,7 @@
       "@common/*": ["components/common/*"],
       "@core/*": ["components/core/*"],
       "@layouts/*": ["components/layouts/*"],
+      "@shadCn/*": ["components/shadCn/*"],
       "@utils/*": ["utils/*"],
       "@lib/*": ["utils/lib/*"],
       "@hooks/*": ["utils/hooks/*"],
@@ -35,4 +36,3 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
-
