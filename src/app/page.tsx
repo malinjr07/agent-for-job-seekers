@@ -1,5 +1,6 @@
 'use client';
 
+import { NextPage } from 'next';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -19,7 +20,9 @@ import {
   TrendingUp,
 } from 'lucide-react';
 import Link from 'next/link';
-import { NextPage } from 'next';
+import PricingCalculator from '@common/pricing-calculator';
+import FAQSection from '@common/faq-section';
+import OnboardingPreview from '@common/onboarding-preview';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -104,7 +107,7 @@ const LandingPage: NextPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       {/* Sticky Social Proof Strip */}
       <div className="sticky top-0 z-50 border-b bg-white/90 backdrop-blur-sm">
-        <div className="container mx-auto px-4 py-2">
+        <div className="container mx-auto px-4">
           <div className="text-muted-foreground flex items-center justify-center space-x-8 text-sm">
             <div className="flex items-center space-x-2">
               <Users className="h-4 w-4" />
@@ -123,9 +126,12 @@ const LandingPage: NextPage = () => {
       </div>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative py-20 lg:py-32">
-        <div className="container mx-auto px-4">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+      <section
+        ref={heroRef}
+        className="relative py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32"
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+          <div className="grid items-center gap-8 sm:gap-10 md:gap-12 lg:grid-cols-2 lg:gap-14 xl:gap-16 2xl:gap-20">
             {/* Left Side - Content */}
             <div className="space-y-8">
               <div className="space-y-4">
@@ -133,11 +139,11 @@ const LandingPage: NextPage = () => {
                   <Zap className="mr-1 h-3 w-3" />
                   Stop Using Generic Resumes
                 </Badge>
-                <h1 className="hero-title text-4xl leading-tight font-bold lg:text-6xl">
+                <h1 className="hero-title text-3xl leading-tight font-bold sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl">
                   Send 100 Tailored Applications in{' '}
                   <span className="text-blue-600">One Night</span>
                 </h1>
-                <p className="hero-subtitle text-muted-foreground max-w-lg text-xl">
+                <p className="hero-subtitle text-muted-foreground max-w-lg text-lg sm:text-xl md:text-2xl lg:text-xl xl:max-w-xl xl:text-2xl">
                   Automate personalized job applications with AI-powered resume
                   customization and batch email campaigns. Land your dream job
                   faster.
@@ -145,13 +151,16 @@ const LandingPage: NextPage = () => {
               </div>
 
               <div className="hero-cta space-y-4">
-                <div className="flex max-w-md flex-col gap-3 sm:flex-row">
+                <div className="flex max-w-md flex-col gap-3 sm:flex-row sm:gap-4 lg:max-w-lg xl:max-w-xl">
                   <Input
                     type="email"
                     placeholder="Enter your email to get instant access"
-                    className="flex-1"
+                    className="flex-1 text-sm sm:text-base"
                   />
-                  <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                  <Button
+                    size="lg"
+                    className="bg-blue-600 px-6 text-sm hover:bg-blue-700 sm:px-8 sm:text-base lg:text-lg"
+                  >
                     Get Started Free
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -212,13 +221,16 @@ const LandingPage: NextPage = () => {
       </section>
 
       {/* Live Counter Demo */}
-      <section ref={counterRef} className="bg-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-8 text-3xl font-bold">
+      <section
+        className="bg-white py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32"
+        ref={counterRef}
+      >
+        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+          <h2 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
             Watch Applications Being Sent{' '}
             <span className="text-blue-600">Right Now</span>
           </h2>
-          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:gap-8 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
             <div className="counter-item">
               <div className="mb-2 text-4xl font-bold text-blue-600">1,247</div>
               <div className="text-muted-foreground">
@@ -238,11 +250,13 @@ const LandingPage: NextPage = () => {
       </section>
 
       {/* Problem Agitation - Story Format */}
-      <section className="bg-gradient-to-r from-slate-900 to-blue-900 py-20 text-white">
-        <div className="container mx-auto px-4">
+      <section className="bg-gradient-to-r from-slate-900 to-blue-900 py-12 text-white sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
           <div className="mx-auto max-w-4xl space-y-8 text-center">
-            <h2 className="text-4xl font-bold">The Job Market Reality Check</h2>
-            <div className="grid gap-8 text-left md:grid-cols-3">
+            <h2 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
+              The Job Market Reality Check
+            </h2>
+            <div className="grid grid-cols-1 gap-4 text-left sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:gap-8 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
               <Card className="border-white/20 bg-white/10 backdrop-blur-sm">
                 <CardContent className="p-6">
                   <Target className="mb-4 h-8 w-8 text-red-400" />
@@ -285,19 +299,22 @@ const LandingPage: NextPage = () => {
       </section>
 
       {/* Features Section */}
-      <section ref={statsRef} className="py-20">
-        <div className="container mx-auto px-4">
+      <section
+        className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32"
+        ref={statsRef}
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
           <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold">
+            <h2 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
               Everything You Need to Land Your Dream Job
             </h2>
-            <p className="text-muted-foreground mx-auto max-w-2xl text-xl">
+            <p className="text-muted-foreground mx-auto max-w-2xl text-base sm:text-lg md:text-xl lg:text-xl xl:text-2xl">
               Connect your Google Sheets, create templates, and let our AI
               handle the rest
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:gap-8 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
             <Card className="stat-card">
               <CardContent className="p-6 text-center">
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100">
@@ -340,51 +357,22 @@ const LandingPage: NextPage = () => {
         </div>
       </section>
 
-      {/* Pricing Teaser */}
-      <section className="bg-blue-50 py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-4 text-4xl font-bold">
-            Simple, Credit-Based Pricing
-          </h2>
-          <p className="text-muted-foreground mx-auto mb-8 max-w-2xl text-xl">
-            Pay only for what you use. No monthly subscriptions, no hidden fees.
-          </p>
+      {/* Pricing Calculator */}
+      <PricingCalculator />
 
-          <Card className="mx-auto max-w-md">
-            <CardContent className="p-8">
-              <div className="mb-2 text-4xl font-bold text-blue-600">$0.10</div>
-              <div className="text-muted-foreground mb-6">
-                per personalized application
-              </div>
-              <ul className="mb-6 space-y-2 text-left text-sm">
-                <li className="flex items-center">
-                  <CheckCircle className="mr-2 h-4 w-4 text-green-500" />
-                  Custom resume generation
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-2 h-4 w-4 text-green-500" />
-                  Personalized email sending
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle className="mr-2 h-4 w-4 text-green-500" />
-                  Delivery tracking
-                </li>
-              </ul>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Start Free Trial
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+      {/* Onboarding Flow Preview */}
+      <OnboardingPreview />
+
+      {/* FAQ Section */}
+      <FAQSection />
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 py-20 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-4 text-4xl font-bold">
+      <section className="bg-gradient-to-r from-blue-600 to-purple-600 py-12 text-white sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32">
+        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+          <h2 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
             Ready to 10x Your Job Application Success?
           </h2>
-          <p className="mx-auto mb-8 max-w-2xl text-xl opacity-90">
+          <p className="mx-auto mb-8 max-w-2xl text-base opacity-90 sm:text-lg md:text-xl lg:text-xl xl:text-2xl">
             Join thousands of job seekers who&apos;ve automated their way to
             better opportunities
           </p>
