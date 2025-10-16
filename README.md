@@ -6,7 +6,7 @@ For managing the project in a more concise way, we should create file in these f
 
 - `public`
 - `src`
-  - `pages`
+  - `app`
   - `components`
     - `core`
     - `common`
@@ -47,16 +47,16 @@ core components.
 
 The `shadCn` folder contains components that are used throughout the application. These components are used to create a consistent look and feel across the application. Components that are being created via `shadcn` cli are stored in this folder.
 
-### Pages
+### App
 
-The `pages` folder contains the main pages of the application. Each folder in this `pages` folder represents a route in the application. The structure of the `pages` folder follows the [`Official Next.js Project Structure and Organization`](https://nextjs.org/docs/pages/getting-started/project-structure).
+The `app` folder contains the main pages of the application. Each folder in this `app` folder represents a route in the application. The structure of the `app` folder follows the [`Official Next.js Project Structure and Organization`](https://nextjs.org/docs/app/getting-started/project-structure).
 
 #### &nbsp; Example
 
 Here is an example of a simple page component:
 
 ```javascript
-// filepath: /path/to/pages/Home.js
+// filepath: /path/to/app/onboarding/page.tsx
 import { NextPage } from 'next';
 import React from 'react';
 import Header from '@layouts/Header';

@@ -158,11 +158,14 @@ const LandingPage: NextPage = () => {
                     className="flex-1 text-sm sm:text-base"
                   />
                   <Button
+                    asChild
                     size="lg"
                     className="bg-blue-600 px-6 text-sm hover:bg-blue-700 sm:px-8 sm:text-base lg:text-lg"
                   >
-                    Get Started Free
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <Link href="/onboarding">
+                      Get Started Free
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
                   </Button>
                 </div>
                 <p className="text-muted-foreground text-sm">

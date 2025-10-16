@@ -17,6 +17,8 @@ const eslintConfig = [
       '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
       'react/jsx-uses-react': 'warn',
       'react/jsx-uses-vars': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      'react/no-unescaped-entities': 'warn',
       'no-restricted-syntax': [
         'warn',
         {
