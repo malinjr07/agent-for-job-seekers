@@ -18,23 +18,23 @@ const HeroSection: FC = () => {
             <div className="space-y-4">
               <Badge variant="secondary" className="px-3 py-1">
                 <Zap className="mr-1 h-3 w-3" />
-                Stop Using Generic Resumes
+                Join the Waitlist
               </Badge>
               <h1 className="hero-title text-3xl leading-tight font-bold sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl">
-                Send 100 Tailored Applications in{' '}
-                <span className="text-blue-600">One Night</span>
+                Be First in Line for ResuMail&apos;s{' '}
+                <span className="text-blue-600">Launch</span>
               </h1>
               <p className="hero-subtitle text-muted-foreground max-w-lg text-lg sm:text-xl md:text-2xl lg:text-xl xl:max-w-xl xl:text-2xl">
-                Automate personalized job applications with AI-powered resume
-                customization and batch email campaigns. Land your dream job
-                faster.
+                Join the waitlist to be among the first to access AI-powered resume
+                customization and batch email campaigns. Revolutionize your job
+                search.
               </p>
             </div>
 
             <div className="hero-cta space-y-4">
               <HeroForm />
               <p className="text-muted-foreground text-sm">
-                No credit card required • 7-day free trial
+                Get notified when we launch • Early access for waitlist members
               </p>
             </div>
           </div>

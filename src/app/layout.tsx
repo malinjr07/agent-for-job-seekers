@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../styles/globals.css';
 import { FC, ReactElement } from 'react';
+import { Toaster } from '@shadCn/ui/sonner';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -106,6 +107,7 @@ const RootLayout: FC<Readonly<{ children: React.ReactNode }>> = ({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+        <Toaster />
       </body>
     </html>
   );

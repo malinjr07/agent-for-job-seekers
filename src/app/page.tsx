@@ -1,7 +1,7 @@
 'use client';
 
 import { NextPage } from 'next';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@shadCn/ui/button';
@@ -16,21 +16,33 @@ import {
   Clock,
   TrendingUp,
 } from 'lucide-react';
+import { toast } from 'sonner';
 import Link from 'next/link';
 import PricingCalculator from '@common/pricing-calculator';
 import FAQSection from '@common/faq-section';
 import OnboardingPreview from '@common/onboarding-preview';
 import HeroSection from '@common/hero-section';
-import { useRouter } from 'next/navigation';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 const LandingPage: NextPage = () => {
-  const router = useRouter();
   const counterRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
+
+  // CTA form state
+  const [ctaEmail, setCtaEmail] = useState<string>('');
+  const [ctaError, setCtaError] = useState<string>('');
+  const [ctaIsSubmitting, setCtaIsSubmitting] = useState<boolean>(false);
+  const [ctaCooldown, setCtaCooldown] = useState<number>(0);
+
+  useEffect(() => {
+    if (ctaCooldown > 0) {
+      const timer = setTimeout(() => setCtaCooldown(ctaCooldown - 1), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [ctaCooldown]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -101,6 +113,57 @@ const LandingPage: NextPage = () => {
 
     return (): void => ctx.revert();
   }, []);
+
+  const validateEmail = (email: string): boolean => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const handleCtaSubmit = async (): Promise<void> => {
+    setCtaError('');
+    setCtaIsSubmitting(true);
+
+    try {
+      if (!ctaEmail) {
+        setCtaError('Email is required');
+        return;
+      }
+
+      if (!validateEmail(ctaEmail)) {
+        setCtaError('Please enter a valid email address');
+        return;
+      }
+
+      if (ctaCooldown > 0) {
+        setCtaError(`Please wait ${ctaCooldown} seconds before submitting again.`);
+        return;
+      }
+
+      // Check localStorage for recent submission
+      const lastSubmission = localStorage.getItem('cta_waitlist_last_submission');
+      if (lastSubmission && Date.now() - parseInt(lastSubmission) < 60000) {
+        setCtaError('Please wait before submitting again.');
+        return;
+      }
+
+      const { addToWaitlist } = await import('@services/waitlist');
+      const result = await addToWaitlist(ctaEmail);
+
+      if (result.success) {
+        toast.success('Successfully joined the waitlist! We\'ll notify you when we launch.');
+        setCtaEmail('');
+        localStorage.setItem('cta_waitlist_last_submission', Date.now().toString());
+        setCtaCooldown(60);
+      } else {
+        setCtaError(result.message);
+      }
+    } catch (err) {
+      console.error('Error during CTA form submission:', err);
+      setCtaError('An error occurred. Please try again.');
+    } finally {
+      setCtaIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -277,28 +340,32 @@ const LandingPage: NextPage = () => {
       <section className="bg-gradient-to-r from-blue-600 to-purple-600 py-12 text-white sm:py-16 md:py-20 lg:py-24 xl:py-28 2xl:py-32">
         <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
           <h2 className="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl">
-            Ready to 10x Your Job Application Success?
+            Join the Waitlist for Early Access
           </h2>
           <p className="mx-auto mb-8 max-w-2xl text-base opacity-90 sm:text-lg md:text-xl lg:text-xl xl:text-2xl">
-            Join thousands of job seekers who&apos;ve automated their way to
-            better opportunities
+            Be among the first to access ResuMail and revolutionize your job search with AI-powered personalization
           </p>
           <div className="mx-auto flex max-w-md flex-col justify-center gap-4 sm:flex-row">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              className="bg-white text-black"
-            />
+            <div className="flex-1 space-y-1">
+              <Input
+                type="email"
+                value={ctaEmail}
+                onChange={(e) => {
+                  setCtaEmail(e.target.value);
+                  if (ctaError) setCtaError('');
+                }}
+                placeholder="Enter your email"
+                className="bg-white text-black"
+              />
+              {ctaError && <p className="text-xs text-red-300 sm:text-sm">{ctaError}</p>}
+            </div>
             <Button
               size="lg"
-              onClick={() => {
-                if (process.env.NEXT_PUBLIC_APP_REDIRECT_PATH) {
-                  router.push(process.env.NEXT_PUBLIC_APP_REDIRECT_PATH);
-                }
-              }}
+              onClick={handleCtaSubmit}
+              disabled={ctaIsSubmitting || ctaCooldown > 0}
               variant="secondary"
             >
-              Get Started Free
+              {ctaIsSubmitting ? 'Joining Waitlist...' : ctaCooldown > 0 ? `Wait ${ctaCooldown}s` : 'Join Waitlist'}
             </Button>
           </div>
         </div>

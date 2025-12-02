@@ -11,12 +11,12 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "@components/shadCn/components",
+    "components": "@shadCn/components",
     "common": "@common/common",
     "core": "@core/core",
     "layouts": "@layouts/layouts",
     "utils": "@utils/utils",
-    "ui": "@components/shadCn/ui",
+    "ui": "@shadCn/ui",
     "lib": "@lib/lib",
     "hooks": "@hooks/hooks",
     "services": "@services/services",
