@@ -15,6 +15,7 @@ import {
   Play,
   Pause,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const steps = [
   {
@@ -56,6 +57,7 @@ const steps = [
 ];
 
 const OnboardingPreview: FC = () => {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -66,19 +68,21 @@ const OnboardingPreview: FC = () => {
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
-          setCurrentStep((current) => (current + 1) % steps.length);
+          setCurrentStep((currentStep + 1) % steps.length);
           return 0;
         }
-        return prev + 2;
+        return prev + 1; // Slower progress for better visibility
       });
-    }, 100);
+    }, 30); // More frequent updates for smoother progress
 
     return (): void => clearInterval(interval);
-  }, [isPlaying]);
+  }, [isPlaying, currentStep]); // Add currentStep to dependencies to ensure proper cleanup
 
   const handleStepClick = (index: number): void => {
     setCurrentStep(index);
     setProgress(0);
+    // Pause autoplay when manually changing steps
+    setIsPlaying(false);
   };
 
   return (
@@ -190,7 +194,7 @@ const OnboardingPreview: FC = () => {
 
                   {/* Step-specific content */}
                   <div className="flex min-h-[200px] items-center justify-center rounded-lg bg-slate-50 p-4 sm:min-h-[300px] sm:p-6">
-                    {currentStep === 0 && (
+                    {currentStep === 0 ? (
                       <div className="w-full max-w-md space-y-4 text-center">
                         <div className="rounded-lg bg-green-100 p-3">
                           <FileSpreadsheet className="mx-auto mb-2 h-8 w-8 text-green-600" />
@@ -217,9 +221,7 @@ const OnboardingPreview: FC = () => {
                           </div>
                         </div>
                       </div>
-                    )}
-
-                    {currentStep === 1 && (
+                    ) : currentStep === 1 ? (
                       <div className="w-full max-w-md space-y-4">
                         <div className="rounded border-2 border-dashed border-gray-300 bg-white p-4">
                           <p className="mb-2 text-xs text-gray-600 sm:text-sm">
@@ -251,9 +253,7 @@ const OnboardingPreview: FC = () => {
                           Variables automatically populated
                         </div>
                       </div>
-                    )}
-
-                    {currentStep === 2 && (
+                    ) : currentStep === 2 ? (
                       <div className="w-full max-w-md space-y-4">
                         <div className="rounded bg-white p-4 shadow-sm">
                           <div className="mb-3 flex items-center gap-2">
@@ -282,9 +282,7 @@ const OnboardingPreview: FC = () => {
                           </div>
                         </div>
                       </div>
-                    )}
-
-                    {currentStep === 3 && (
+                    ) : currentStep === 3 ? (
                       <div className="w-full max-w-md space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                           <div className="rounded bg-white p-3 text-center">
@@ -321,7 +319,7 @@ const OnboardingPreview: FC = () => {
                           </div>
                         </div>
                       </div>
-                    )}
+                    ) : null}
                   </div>
 
                   <div className="mt-6 flex items-center justify-between">
@@ -347,7 +345,15 @@ const OnboardingPreview: FC = () => {
         </div>
 
         <div className="mt-8 text-center sm:mt-12">
-          <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+          <Button
+            size="lg"
+            onClick={() => {
+              if (process.env.NEXT_PUBLIC_APP_REDIRECT_PATH) {
+                router.push(process.env.NEXT_PUBLIC_APP_REDIRECT_PATH);
+              }
+            }}
+            className="bg-blue-600 hover:bg-blue-700"
+          >
             Start Your Free Trial
           </Button>
           <p className="text-muted-foreground mt-2 text-xs sm:text-sm">

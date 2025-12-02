@@ -4,7 +4,7 @@ import { FC, ComponentProps } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { XIcon } from 'lucide-react';
 
-import { cn } from '@utils/lib';
+import { cn } from '@lib/index';
 
 const Dialog: FC<ComponentProps<typeof DialogPrimitive.Root>> = ({
   ...props

@@ -2,7 +2,7 @@
 
 import { JSX } from 'react';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
-import { cn } from '@utils/lib';
+import { cn } from '@lib/index';
 
 const Tabs = ({
   className,

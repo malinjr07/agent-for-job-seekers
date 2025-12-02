@@ -20,17 +20,17 @@
     ],
     "baseUrl": "src/",
     "paths": {
-      "@components/*": ["components/*"],
       "@common/*": ["components/common/*"],
       "@core/*": ["components/core/*"],
       "@layouts/*": ["components/layouts/*"],
       "@shadCn/*": ["components/shadCn/*"],
-      "@utils/*": ["utils/*"],
       "@lib/*": ["utils/lib/*"],
       "@hooks/*": ["utils/hooks/*"],
       "@services/*": ["utils/services/*"],
       "@store/*": ["utils/store/*"],
       "@types/*": ["utils/types/*"]
+      /* "@utils/*": ["utils/*"],
+      "@components/*": ["components/*"] */
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

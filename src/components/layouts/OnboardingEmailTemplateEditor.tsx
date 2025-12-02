@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, JSX } from 'react';
-import { Card, CardContent } from '@components/shadCn/ui/card';
-import { Button } from '@components/shadCn/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@components/shadCn/ui/tooltip';
+import { Card, CardContent } from '@shadCn/ui/card';
+import { Button } from '@shadCn/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@shadCn/ui/tooltip';
 import { gsap } from 'gsap';
 
 // Mock rich text editor component

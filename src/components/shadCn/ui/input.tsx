@@ -1,5 +1,5 @@
 import { ComponentProps, FC, ReactElement } from 'react';
-import { cn } from '@utils/lib';
+import { cn } from '@lib/index';
 
 const Input: FC<ComponentProps<'input'>> = ({
   className,
